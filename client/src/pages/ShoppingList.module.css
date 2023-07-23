@@ -1,0 +1,89 @@
+.grid-item {
+  margin: 20px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.shoppinglist {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.image {
+  width: 100px;
+  height: 100px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.book-footer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filters {
+  margin-bottom: 20px;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.price-range-input {
+  display: flex;
+  width: 100px;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.ranges {
+  display: flex;
+  gap: 50px;
+}
+
+.price-range-input label {
+  font-size: 15px;
+}
+
+.search {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.search label {
+  font-size: 15px;
+}
+
+.ratingSearch {
+  margin-top: 10px;
+  width: 200px;
+  margin-left: 50px;
+}
+
+.filter-action {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.item-rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}

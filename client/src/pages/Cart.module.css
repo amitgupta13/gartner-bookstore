@@ -1,0 +1,20 @@
+.cart-item {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card {
+  margin-bottom: 20px;
+}
+
+.card-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.image {
+  width: 150px;
+  height: 150px;
+}
