@@ -23,11 +23,13 @@ export default function Signup() {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     if (!formRef.current.checkValidity()) return;
-    const data = await doSignup(values).unwrap();
-    localStorage.setItem("accessToken", data?.accessToken);
-    localStorage.setItem("refreshToken", data?.refreshToken);
-    dispatch(setCredentials(data));
-    formRef.current.reset();
+    try {
+      const data = await doSignup(values).unwrap();
+      localStorage.setItem("accessToken", data?.accessToken);
+      localStorage.setItem("refreshToken", data?.refreshToken);
+      dispatch(setCredentials(data));
+      formRef.current.reset();
+    } catch (err) {}
   };
 
   return (

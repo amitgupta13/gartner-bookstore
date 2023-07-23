@@ -27,15 +27,17 @@ export default function Signin() {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     if (!formRef.current.checkValidity()) return;
-    const data = await doLogin({
-      [values.type]: values.type === "email" ? values.email : values.mobile,
-      password: values.password,
-      type: values.type,
-    }).unwrap();
-    localStorage.setItem("accessToken", data?.accessToken);
-    localStorage.setItem("refreshToken", data?.refreshToken);
-    dispatch(setCredentials(data));
-    formRef.current.reset();
+    try {
+      const data = await doLogin({
+        [values.type]: values.type === "email" ? values.email : values.mobile,
+        password: values.password,
+        type: values.type,
+      }).unwrap();
+      localStorage.setItem("accessToken", data?.accessToken);
+      localStorage.setItem("refreshToken", data?.refreshToken);
+      dispatch(setCredentials(data));
+      formRef.current.reset();
+    } catch (err) {}
   };
 
   return (

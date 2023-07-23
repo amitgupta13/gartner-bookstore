@@ -4,11 +4,14 @@ import classes from "./Signin.module.css";
 import Card from "../components/ui/Card";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
-import { useChangePasswordMutation } from "../store";
+import { useChangePasswordMutation, setCredentials } from "../store";
+import { useToast } from "../hooks/useToast";
+import { useDispatch } from "react-redux";
 
 export default function ChangePassword() {
-  const [doChange, result] = useChangePasswordMutation();
-  console.log(result);
+  const [doChange] = useChangePasswordMutation();
+  const { showToast, ToastContainer } = useToast();
+  const dispatch = useDispatch();
   const formRef = useRef();
   const [values, setValues] = useState({
     currentPassword: "",
@@ -25,11 +28,21 @@ export default function ChangePassword() {
     });
 
   const handleOnSubmit = async (e) => {
+    if (!formRef.current.checkValidity()) return;
     e.preventDefault();
-    doChange({
-      currentPassword: values.currentPassword,
-      newPassword: values.newPassword,
-    });
+    try {
+      const data = await doChange({
+        currentPassword: values.currentPassword,
+        newPassword: values.newPassword,
+      }).unwrap();
+      localStorage.setItem("accessToken", data?.accessToken);
+      localStorage.setItem("refreshToken", data?.refreshToken);
+      dispatch(setCredentials(data));
+      formRef.current.reset();
+      showToast("Password changed successfully", "success");
+    } catch (err) {
+      showToast(`Error changing password ${err?.data?.message}`, "error");
+    }
   };
 
   return (
@@ -45,15 +58,12 @@ export default function ChangePassword() {
               onChange={onChange}
             />
           ))}
-          <Button
-            disabled={!values.valid}
-            className={classes["auth-button"]}
-            primary
-          >
+          <Button className={classes["auth-button"]} primary>
             Change Password
           </Button>
         </div>
       </form>
+      <ToastContainer />
     </Card>
   );
 }
