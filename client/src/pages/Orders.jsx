@@ -49,7 +49,7 @@ export default function Orders() {
               </h4>
               <h4>
                 Transaction Status -{" "}
-                {status.dispatchStatus[item.transactionStatus]}
+                {status.transactionStatus[item.transactionStatus]}
               </h4>
             </div>
             <h4>Items - </h4>
